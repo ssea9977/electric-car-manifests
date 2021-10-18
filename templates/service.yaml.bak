@@ -15,7 +15,3 @@ spec:
       name: http
   selector:
     {{- include "electric-car.selectorLabels" . | nindent 4 }}
-status:
-  loadBalancer:
-    ingress:
-    - host: electro.badakim.shop
