@@ -5,9 +5,9 @@ metadata:
   labels:
     {{- include "electric-car.labels" . | nindent 4 }}
 spec:
-  #type: {{ .Values.service.type }}
-  externalIPs: 
-    {{- toYaml .Values.service.externalIPs | nindent 4 }}
+  type: {{ .Values.service.type }}
+  #externalIPs: 
+  #  {{- toYaml .Values.service.externalIPs | nindent 4 }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 80
@@ -15,7 +15,3 @@ spec:
       name: http
   selector:
     {{- include "electric-car.selectorLabels" . | nindent 4 }}
-providers:
-  kubernetesIngress:
-    ingressEndpoint:
-      ip: 172.31.10.152
