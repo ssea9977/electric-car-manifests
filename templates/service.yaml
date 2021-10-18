@@ -15,7 +15,3 @@ spec:
       name: http
   selector:
     {{- include "electric-car.selectorLabels" . | nindent 4 }}
-providers:
-  kubernetesIngress:
-    ingressEndpoint:
-      ip: 172.31.10.152
