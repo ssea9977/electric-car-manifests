@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selenium-grid-k8s-autoscaler-deployment
+  labels:
+    app: selenium-grid-k8s-autoscaler
+    name: selenium-grid-k8s-autoscaler
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selenium-grid-k8s-autoscaler
+  template:
+    metadata:
+      labels:
+        app: selenium-grid-k8s-autoscaler
+        name: selenium-grid-k8s-autoscaler
+    spec:
+      containers:
+        - name: selenium-grid-k8s-autoscaler
+          image: sahajamit/selenium-grid-k8s-autoscaler
+          env:
+            - name: k8s_host
+              value: 172.31.7.116 
+            - name: k8s_token
+              value: eyJhbGciOiJSUzI1NiIsImtpZCI6InJieHA3azNHZXFxVFpaODVhMEtjcnVFLVctZUd2WHpELW5YTll4NnBHNk0ifQ.eyJpc3MiOiJrdWJlcm5ldGVzL3NlcnZpY2VhY2NvdW50Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9uYW1lc3BhY2UiOiJkZWZhdWx0Iiwia3ViZXJuZXRlcy5pby9zZXJ2aWNlYWNjb3VudC9zZWNyZXQubmFtZSI6ImF1dG8tc2NhbGUtcm9ib3Qtc2EtdG9rZW4tc3FqOG4iLCJrdWJlcm5ldGVzLmlvL3NlcnZpY2VhY2NvdW50L3NlcnZpY2UtYWNjb3VudC5uYW1lIjoiYXV0by1zY2FsZS1yb2JvdC1zYSIsImt1YmVybmV0ZXMuaW8vc2VydmljZWFjY291bnQvc2VydmljZS1hY2NvdW50LnVpZCI6IjAzZmY2OTAwLThhNDUtNDUzOS04NWEzLTc3OTJiNWM4NjI2NSIsInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpkZWZhdWx0OmF1dG8tc2NhbGUtcm9ib3Qtc2EifQ.J64eULb61ojV8MrGbZ36PJdWfQPOIKZB62bSqPOEC3aLcDvDjwy3u9oyINBsKXlZcNhE6Wa1XLl2jS7HowWOSXVxTRg-lKMjW-esWx4JJ5PalxEE_k-eXUvAl2cllywLomyvDQVdJtXsKNZLi8fQVOuwCU7AT0SXrKzIM2o6-mBBcAV1OnWwmCkWXIZg2Z42Su38gdDlnwtEXszz3INIRG4EStIiOd9uh4YCb0o-dLZBBAIXmG5otSjVJhDFW9q81aG1PvdQRlHp0s5KAHbDcqO6VZZKTXBG-FUq8mSSMEhZsxFN2NQcndKOSorywB2i-P8tiOeuBPmZZSip7YuCvw
+            - name: selenium_grid_host
+              value: selenium-hub-deployment:4444
+            - name: node_chrome_max_scale_limit
+              value: "2"
+            - name: node_chrome_min_scale_limit
+              value: "1"
+            - name: grid_scale_check_frequency_in_sec
+              value: "10"
+            - name: server_port
+              value: "8088"
+            - name: logging_level_com_sahajamit_k8s
+              value: "INFO"
